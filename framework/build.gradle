@@ -42,8 +42,10 @@ dependencies {
     api 'com.gyf.immersionbar:immersionbar:3.0.0-beta05'
     //RecycleView适配器 https://github.com/CymChad/BaseRecyclerViewAdapterHelper
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
-    // eventBus事件线程管理
-    api 'org.greenrobot:eventbus:3.1.1'
-    //图片下载管理
-    api 'com.github.bumptech.glide:glide:4.10.0'
+    // eventBus事件线程管理 https://github.com/greenrobot/EventBus
+    api 'org.greenrobot:eventbus:3.2.0'
+    //图片下载管理 https://github.com/bumptech/glide
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    // https://github.com/google/gson
+    api 'com.google.code.gson:gson:2.8.6'
 }

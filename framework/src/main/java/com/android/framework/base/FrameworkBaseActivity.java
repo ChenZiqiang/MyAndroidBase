@@ -32,7 +32,7 @@ public abstract class FrameworkBaseActivity extends AppCompatActivity {
         mActivity = this;
         mContext = this;
         TAG = CommonTool.getSimpleActivityName(mContext);
-        Logger.i("ActivityName", TAG);
+        Logger.t("ActivityName").i(TAG);
     }
 
     /**
@@ -180,9 +180,8 @@ public abstract class FrameworkBaseActivity extends AppCompatActivity {
     protected String getTextString(TextView view) {
         if (view != null) {
             return view.getText().toString().trim();
-        } else {
-            return "";
         }
+        return null;
     }
 
     /**

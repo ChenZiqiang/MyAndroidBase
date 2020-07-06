@@ -7,6 +7,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+/**
+ * 通用工具类.
+ */
 public class CommonTool {
 
     /**
