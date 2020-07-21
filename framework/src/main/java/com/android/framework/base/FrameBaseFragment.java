@@ -15,10 +15,12 @@ import org.greenrobot.eventbus.EventBus;
 
 /**
  * Fragment基类
+ * @author 陈自强
  */
 public abstract class FrameBaseFragment extends Fragment {
     protected View rootView;
     protected Context mContext;
+
     public View getRootView() {
         return rootView;
     }
@@ -45,6 +47,9 @@ public abstract class FrameBaseFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (rootView == null) {
+            rootView = view;
+        }
     }
 
     protected <T extends View> T findViewById(int viewId) {

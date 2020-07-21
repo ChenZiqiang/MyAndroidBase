@@ -20,6 +20,7 @@ import org.greenrobot.eventbus.EventBus;
 
 /**
  * The type Frame work base activity.
+ * @author 陈自强
  */
 public abstract class FrameBaseActivity extends AppCompatActivity {
     protected Activity mActivity;
