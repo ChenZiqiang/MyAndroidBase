@@ -22,7 +22,7 @@ import org.greenrobot.eventbus.EventBus;
  * The type Frame work base activity.
  * @author 陈自强
  */
-public abstract class FrameBaseActivity extends AppCompatActivity {
+public abstract class BaseFrameActivity extends AppCompatActivity {
     protected Activity mActivity;
     protected Context mContext;
     protected String TAG;
@@ -50,25 +50,6 @@ public abstract class FrameBaseActivity extends AppCompatActivity {
             EventBus.getDefault().unregister(this);
         }
     }
-
-    /**
-     * 设置返回控件
-     *
-     * @param view 返回按钮
-     */
-    protected void setBackBtn(View view) {
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-    }
-
-    public void onBack(View view) {
-        finish();
-    }
-
 
     /**
      * 长时间显示Toast提示

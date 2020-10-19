@@ -17,9 +17,18 @@ import org.greenrobot.eventbus.EventBus;
  * Fragment基类
  * @author 陈自强
  */
-public abstract class FrameBaseFragment extends Fragment {
+public abstract class BaseFrameFragment extends Fragment {
     protected View rootView;
     protected Context mContext;
+    protected int layoutId;
+
+    public BaseFrameFragment() {
+    }
+
+    public BaseFrameFragment(int contentLayoutId) {
+        super(contentLayoutId);
+        layoutId=contentLayoutId;
+    }
 
     public View getRootView() {
         return rootView;

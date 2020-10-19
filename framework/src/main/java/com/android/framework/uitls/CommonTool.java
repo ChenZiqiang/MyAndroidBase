@@ -7,10 +7,15 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import java.util.List;
+
 /**
  * 通用工具类.
  */
 public class CommonTool {
+    public static boolean isListEmpty(List list) {
+        return list == null || list.isEmpty();
+    }
 
     /**
      * 获取Activity的名字

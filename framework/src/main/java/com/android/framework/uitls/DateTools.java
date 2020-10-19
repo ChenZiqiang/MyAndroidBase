@@ -1,7 +1,5 @@
 package com.android.framework.uitls;
 
-import com.orhanobut.logger.Logger;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -77,5 +75,7 @@ public class DateTools {
         Date date = new Date(time);
         return format.format(date);
     }
+
+
 
 }
