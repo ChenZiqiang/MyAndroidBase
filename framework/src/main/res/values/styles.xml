@@ -1,0 +1,24 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/activity_anim_style</item>
+    </style>
+
+
+    <style name="activity_anim_style">
+        <!--第二个activity进入动画-->
+        <item name="android:activityOpenEnterAnimation">@anim/activity_anim_open_in</item>
+        <!--第二个activity进入时，第一个activity退出动画-->
+        <item name="android:activityOpenExitAnimation">@anim/activity_anim_open_out</item>
+        <!--第二个activity退出动画-->
+        <item name="android:activityCloseExitAnimation">@anim/activity_anim_close_out</item>
+        <!--第二个activity退出时，第一个activity进入动画-->
+        <item name="android:activityCloseEnterAnimation">@anim/activity_anim__close_in</item>
+    </style>
+
+
+</resources>

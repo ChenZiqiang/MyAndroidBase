@@ -1,5 +1,9 @@
 package com.android.framework.base;
 
+import android.content.Context;
+
+import androidx.multidex.MultiDex;
+
 import org.litepal.LitePalApplication;
 
 /**
@@ -14,5 +18,11 @@ public class BaseApplication extends LitePalApplication {
     public void onCreate() {
         super.onCreate();
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 }
