@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -26,7 +28,7 @@ public abstract class BaseFrameActivity extends AppCompatActivity {
     protected Activity mActivity;
     protected Context mContext;
     protected String TAG;
-
+    private boolean firstComplete = true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,23 @@ public abstract class BaseFrameActivity extends AppCompatActivity {
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus && firstComplete) {
+            firstComplete = false;
+            new Handler(Looper.myLooper()).post(this::onCreateComplete);
+        }
+    }
+
+    /**
+     * 新的生命周期：activity创建完成
+     * 将绘制时间比较耗时的View放入此方法绘制时能有效减少Activity跳转时的卡顿
+     */
+    protected void onCreateComplete() {
+
     }
 
     /**
