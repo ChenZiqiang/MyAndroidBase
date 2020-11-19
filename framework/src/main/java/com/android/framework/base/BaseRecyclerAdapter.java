@@ -65,4 +65,11 @@ public abstract class BaseRecyclerAdapter<T, DB extends ViewDataBinding> extends
         }
         return false;
     }
+
+    @Override
+    protected void convert(@NotNull BaseDataViewHolder<DB> holder, T t) {
+        onBindItem(holder,holder.binding, t,holder.getAdapterPosition());
+    }
+
+    protected abstract void onBindItem(@NotNull BaseDataViewHolder<DB> holder,DB binding, T t,int position);
 }

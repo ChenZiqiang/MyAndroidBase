@@ -1,9 +1,12 @@
 package com.android.framework.uitls;
 
 import android.content.Context;
+import android.graphics.Outline;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
@@ -46,4 +49,20 @@ public class DataBindingHelper {
         }
     }
 
+    /**
+     * 任意View裁剪圆角
+     *
+     * @param view 要裁剪的View
+     * @param roundDP 圆角度数，单位为DP，
+     */
+    @BindingAdapter({"cutViewRound"})
+    public static void cutViewRound(View view, int roundDP) {
+        view.setClipToOutline(true);
+        view.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), ViewTools.dp2px(roundDP));
+            }
+        });
+    }
 }
