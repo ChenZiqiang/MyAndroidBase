@@ -21,4 +21,20 @@
     </style>
 
 
+    <style name="BottomDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_up</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_down</item>
+    </style>
+    <style name="custom_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 设置背景为空等于去掉了边框 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="custom_dialog.bottom_anim">
+        <item name="android:windowAnimationStyle">@style/BottomDialogAnimation</item>
+    </style>
 </resources>

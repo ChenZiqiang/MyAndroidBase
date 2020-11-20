@@ -11,8 +11,7 @@ import androidx.databinding.ViewDataBinding;
 public class BaseDataBindFrameActivity<DB extends ViewDataBinding> extends BaseFrameActivity {
     protected DB binding;
 
-    @Override
-    public void setContentView(int layoutResID) {
+    public void setContentView2(int layoutResID) {
         binding = DataBindingUtil.setContentView(this, layoutResID);
     }
 }

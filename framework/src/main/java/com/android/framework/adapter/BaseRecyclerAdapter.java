@@ -1,4 +1,4 @@
-package com.android.framework.base;
+package com.android.framework.adapter;
 
 import android.content.Context;
 import android.view.ViewGroup;
@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.ViewDataBinding;
 
+import com.android.framework.base.BaseDataViewHolder;
 import com.android.framework.uitls.DataBindingHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
