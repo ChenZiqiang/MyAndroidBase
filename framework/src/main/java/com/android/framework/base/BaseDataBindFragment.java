@@ -45,4 +45,12 @@ public abstract class BaseDataBindFragment<DB extends ViewDataBinding> extends B
         }
         return super.onCreateView(inflater, container, savedInstanceState);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        onFragmentCreated();
+    }
+
+    protected abstract void onFragmentCreated();
 }

@@ -40,6 +40,7 @@ dependencies {
     api 'androidx.constraintlayout:constraintlayout:2.0.4'
     api 'com.google.android.material:material:1.2.1'
     api 'androidx.multidex:multidex:2.0.1'
+    api 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
     //Recycler view 弹性布局适配器 https://github.com/google/flexbox-layout
     api 'com.google.android:flexbox:2.0.1'
     //日志打印 https://github.com/orhanobut/logger
@@ -64,4 +65,5 @@ dependencies {
     api'com.contrarywind:Android-PickerView:4.1.9'
     //图片选择 https://github.com/LuckSiege/PictureSelector/blob/master/README_CN.md
     api 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.9'
+
 }
