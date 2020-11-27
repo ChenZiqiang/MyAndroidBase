@@ -17,13 +17,13 @@ import com.android.framework.mvvm.DataBindingHelper;
  * @version 1.0
  * @date 2020/10/19
  */
-public abstract class BaseDataBindFragment<DB extends ViewDataBinding> extends BaseFrameFragment {
+public abstract class FrameBaseFragmentBind<DB extends ViewDataBinding> extends FrameBaseFragment {
     protected DB binding;
 
-    public BaseDataBindFragment() {
+    public FrameBaseFragmentBind() {
     }
 
-    public BaseDataBindFragment(int contentLayoutId) {
+    public FrameBaseFragmentBind(int contentLayoutId) {
         super(contentLayoutId);
     }
 
@@ -49,7 +49,12 @@ public abstract class BaseDataBindFragment<DB extends ViewDataBinding> extends B
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        createViewModel();
         onFragmentCreated();
+    }
+
+    public void createViewModel() {
+
     }
 
     protected abstract void onFragmentCreated();

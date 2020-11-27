@@ -4,6 +4,9 @@ import android.content.Context;
 
 import androidx.multidex.MultiDex;
 
+import com.android.framework.uitls.FrameUtil;
+import com.kongzue.dialog.util.BaseDialog;
+
 import org.litepal.LitePalApplication;
 
 /**
@@ -17,12 +20,18 @@ public class BaseApplication extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        FrameUtil.init(this,true);
     }
 
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+    }
+
+    @Override
+    public void onTerminate() {
+        BaseDialog.unload();
+        super.onTerminate();
     }
 }

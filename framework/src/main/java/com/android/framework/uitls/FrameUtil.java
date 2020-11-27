@@ -2,6 +2,7 @@ package com.android.framework.uitls;
 
 import android.app.Application;
 
+import com.kongzue.dialog.util.DialogSettings;
 import com.lzy.okgo.OkGo;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -25,5 +26,15 @@ public class FrameUtil {
                 return debug;
             }
         });
+        initDialog(debug);
+    }
+
+    private static void initDialog(final boolean debug) {
+        DialogSettings.init();
+        DialogSettings.DEBUGMODE = debug;
+//        DialogSettings.isUseBlur = true;
+        DialogSettings.style = DialogSettings.STYLE.STYLE_IOS;
+        DialogSettings.theme = DialogSettings.THEME.LIGHT;
+        DialogSettings.autoShowInputKeyboard = true;
     }
 }

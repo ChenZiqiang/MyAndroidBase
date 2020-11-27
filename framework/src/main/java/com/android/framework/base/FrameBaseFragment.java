@@ -2,6 +2,7 @@ package com.android.framework.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,23 +12,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.framework.mvvm.BaseViewModel;
+import com.kongzue.dialog.v3.WaitDialog;
+
 import org.greenrobot.eventbus.EventBus;
 
 /**
  * Fragment基类
+ *
  * @author 陈自强
  */
-public abstract class BaseFrameFragment extends Fragment {
+public abstract class FrameBaseFragment extends Fragment {
     protected View rootView;
     protected Context mContext;
     protected int layoutId;
 
-    public BaseFrameFragment() {
+    public FrameBaseFragment() {
     }
 
-    public BaseFrameFragment(int contentLayoutId) {
+    public FrameBaseFragment(int contentLayoutId) {
         super(contentLayoutId);
-        layoutId=contentLayoutId;
+        layoutId = contentLayoutId;
     }
 
     public View getRootView() {
@@ -113,11 +118,56 @@ public abstract class BaseFrameFragment extends Fragment {
         EventBus.getDefault().register(this);
     }
 
+    protected FrameBaseActivity getBaseActivity() {
+        if (getActivity() instanceof FrameBaseActivity) {
+            return (FrameBaseActivity) getActivity();
+        }
+        return null;
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
+    }
+
+    /**
+     * 显示加载进度条
+     */
+    protected void showLoading() {
+        showLoading("");
+    }
+
+    protected void showLoading(String msg) {
+        if (getBaseActivity() != null) {
+            WaitDialog.reset();
+            getBaseActivity().showLoading(msg);
+        }
+    }
+
+    protected void dismissLoading() {
+        WaitDialog.dismiss();
+    }
+
+    public void initDialogVM(BaseViewModel vm) {
+        vm.getShowTip().observe(this, msg -> {
+            if (TextUtils.isEmpty(msg)) {
+                showLoading();
+            } else {
+                showLoading(msg);
+            }
+        });
+
+        vm.getDismissTip().observe(this, msg -> {
+            dismissLoading();
+        });
+
+        vm.getTips().observe(this, tips -> {
+            if (getBaseActivity() != null) {
+                getBaseActivity().showTips(tips);
+            }
+        });
     }
 }

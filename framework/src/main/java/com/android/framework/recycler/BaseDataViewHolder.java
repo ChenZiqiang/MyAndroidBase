@@ -1,4 +1,4 @@
-package com.android.framework.base;
+package com.android.framework.recycler;
 
 import androidx.databinding.ViewDataBinding;
 
