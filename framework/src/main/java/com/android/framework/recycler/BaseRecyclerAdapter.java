@@ -1,4 +1,4 @@
-package com.android.framework.adapter;
+package com.android.framework.recycler;
 
 import android.content.Context;
 import android.view.ViewGroup;
@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ViewDataBinding;
 
 import com.android.framework.base.BaseDataViewHolder;
-import com.android.framework.uitls.DataBindingHelper;
+import com.android.framework.mvvm.DataBindingHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import org.jetbrains.annotations.NotNull;
@@ -69,8 +69,8 @@ public abstract class BaseRecyclerAdapter<T, DB extends ViewDataBinding> extends
 
     @Override
     protected void convert(@NotNull BaseDataViewHolder<DB> holder, T t) {
-        onBindItem(holder,holder.binding, t,holder.getAdapterPosition());
+        onBindItem(holder, holder.binding, t, holder.getBindingAdapterPosition());
     }
 
-    protected abstract void onBindItem(@NotNull BaseDataViewHolder<DB> holder,DB binding, T t,int position);
+    protected abstract void onBindItem(@NotNull BaseDataViewHolder<DB> holder, DB binding, T data, int position);
 }

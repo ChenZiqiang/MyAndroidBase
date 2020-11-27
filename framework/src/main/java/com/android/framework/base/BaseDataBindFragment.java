@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
 
-import com.android.framework.uitls.DataBindingHelper;
+import com.android.framework.mvvm.DataBindingHelper;
 
 /**
  * @author 陈自强

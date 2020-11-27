@@ -54,16 +54,8 @@ public abstract class BaseFullScreenDialog extends Dialog {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         decorView.setSystemUiVisibility(systemUiVisibility);
-//        window.setStatusBarColor(0x4c000000);
     }
 
-    /**
-     * 设置主界面替代setContentView方法
-     *
-     * @param view
-     */
-    protected void initView(View view) {
-        setContentView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-    }
+
 
 }

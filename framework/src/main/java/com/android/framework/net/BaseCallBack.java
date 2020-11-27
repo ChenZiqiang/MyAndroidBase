@@ -1,9 +1,5 @@
 package com.android.framework.net;
 
-import android.os.Handler;
-import android.os.Looper;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -29,17 +25,17 @@ public abstract class BaseCallBack<T> extends StringCallback {
     protected String TAG = "HttpResult";
     protected Gson gson;
 
-    public BaseCallBack() {
-        gson = new Gson();
-    }
 
     protected BaseHttpBean<T> baseBean;
     protected boolean isList;
     public Class<T> tClass;
 
+    public BaseCallBack() {
+        this(null);
+    }
+
     public BaseCallBack(Class<T> tClass) {
-        this.tClass = tClass;
-        gson = new Gson();
+        this(tClass, false);
     }
 
     public BaseCallBack(Class<T> tClass, boolean isList) {
@@ -62,8 +58,8 @@ public abstract class BaseCallBack<T> extends StringCallback {
             }
             if (baseBean != null) {
                 httpSuccess(baseBean.data);
-            }else {
-                onResultError("解析失败");
+            } else {
+                onResultError(BaseHttpCode.ERROR_JSON,"解析失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,20 +76,23 @@ public abstract class BaseCallBack<T> extends StringCallback {
                         T t = gson.fromJson(data, tClass);
                         httpSuccess(t);
                     }
-
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    onResultError("解析失败");
+                    onResultError(BaseHttpCode.ERROR_JSON,"解析失败");
                 }
             } else {
-                onResultError("解析失败");
+                onResultError(BaseHttpCode.ERROR_JSON,"解析失败");
             }
         }
     }
 
-    public void onResultError(String msg) {
-
+    @Override
+    public void onError(Response<String> response) {
+        super.onError(response);
+        onResultError(BaseHttpCode.ERROR_NET,response.body());
     }
+
+    public abstract void onResultError(int code, String msg);
 
     public abstract void httpSuccess(T t);
 

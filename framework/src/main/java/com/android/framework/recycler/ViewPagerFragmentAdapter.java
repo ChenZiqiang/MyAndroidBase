@@ -1,4 +1,4 @@
-package com.android.framework.adapter;
+package com.android.framework.recycler;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

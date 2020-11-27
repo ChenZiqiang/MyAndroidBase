@@ -1,4 +1,4 @@
-package com.android.framework.data;
+package com.android.framework.mvvm;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

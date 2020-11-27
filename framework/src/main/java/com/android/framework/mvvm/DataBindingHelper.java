@@ -1,4 +1,4 @@
-package com.android.framework.uitls;
+package com.android.framework.mvvm;
 
 import android.content.Context;
 import android.graphics.Outline;
@@ -13,8 +13,8 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
+import com.android.framework.uitls.ViewTools;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 /**
  * @author 陈自强
