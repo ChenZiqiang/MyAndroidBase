@@ -12,7 +12,7 @@ import com.android.framework.data.Tips;
  * @version 1.0
  * @date 2020/10/19
  */
-public class BaseViewModel extends ViewModel {
+public class FrameBaseViewModel extends ViewModel {
     private MutableLiveData<String> message = new MutableLiveData<>();
     private MutableLiveData<Integer> typeCode = new MutableLiveData<>();
     private MutableLiveData<String> showTip = new MutableLiveData<>();

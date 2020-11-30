@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.android.framework.mvvm.BaseViewModel;
+import com.android.framework.mvvm.FrameBaseViewModel;
 import com.kongzue.dialog.v3.WaitDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -151,7 +151,7 @@ public abstract class FrameBaseFragment extends Fragment {
         WaitDialog.dismiss();
     }
 
-    public void initDialogVM(BaseViewModel vm) {
+    public void initDialogVM(FrameBaseViewModel vm) {
         vm.getShowTip().observe(this, msg -> {
             if (TextUtils.isEmpty(msg)) {
                 showLoading();

@@ -22,29 +22,29 @@ import java.util.List;
  * @version 1.0
  * @date 2020 /9/29
  */
-public abstract class BaseRecyclerAdapter<T, DB extends ViewDataBinding> extends BaseQuickAdapter<T, BaseDataViewHolder<DB>> {
+public abstract class FrameBaseAdapter<T, DB extends ViewDataBinding> extends BaseQuickAdapter<T, FrameBaseViewHolder<DB>> {
     protected Context mContext;
     protected int layoutResId;
 
-    public BaseRecyclerAdapter(int layoutResId, @Nullable List<T> data) {
+    public FrameBaseAdapter(int layoutResId, @Nullable List<T> data) {
         super(layoutResId, data);
         this.layoutResId = layoutResId;
     }
 
-    public BaseRecyclerAdapter(int layoutResId) {
+    public FrameBaseAdapter(int layoutResId) {
         super(layoutResId);
         this.layoutResId = layoutResId;
     }
 
     @NonNull
     @Override
-    public BaseDataViewHolder<DB> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FrameBaseViewHolder<DB> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (mContext == null) {
             mContext = parent.getContext();
         }
         if (checkAdapterView(viewType)) {
             DB DB = DataBindingHelper.inflate(parent, layoutResId);
-            return new BaseDataViewHolder<DB>(DB);
+            return new FrameBaseViewHolder<DB>(DB);
         } else {
             return super.onCreateViewHolder(parent, viewType);
         }
@@ -67,9 +67,9 @@ public abstract class BaseRecyclerAdapter<T, DB extends ViewDataBinding> extends
     }
 
     @Override
-    protected void convert(@NotNull BaseDataViewHolder<DB> holder, T t) {
+    protected void convert(@NotNull FrameBaseViewHolder<DB> holder, T t) {
         onBindItem(holder, holder.binding, t, holder.getBindingAdapterPosition());
     }
 
-    protected abstract void onBindItem(@NotNull BaseDataViewHolder<DB> holder, DB binding, T data, int position);
+    protected abstract void onBindItem(@NotNull FrameBaseViewHolder<DB> holder, DB binding, T data, int position);
 }

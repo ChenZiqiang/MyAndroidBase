@@ -17,7 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.framework.data.Tips;
-import com.android.framework.mvvm.BaseViewModel;
+import com.android.framework.mvvm.FrameBaseViewModel;
 import com.android.framework.uitls.CommonTool;
 import com.kongzue.dialog.v3.TipDialog;
 import com.kongzue.dialog.v3.WaitDialog;
@@ -260,7 +260,7 @@ public abstract class FrameBaseActivity extends AppCompatActivity {
         TipDialog.show(this, tips.getMsg(), tips.getType());
     }
 
-    public void initDialogVM(BaseViewModel vm) {
+    public void initDialogVM(FrameBaseViewModel vm) {
         vm.getShowTip().observe(this, msg -> {
             if (TextUtils.isEmpty(msg)) {
                 showLoading();

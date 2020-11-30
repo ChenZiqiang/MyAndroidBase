@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.android.framework.mvvm.BaseViewModel;
+import com.android.framework.mvvm.FrameBaseViewModel;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
  * @version 1.0
  * @date 2020/11/27
  */
-public abstract class FrameBaseActivityBindVM<DB extends ViewDataBinding, VM extends BaseViewModel> extends FrameBaseActivityBind<DB> {
+public abstract class FrameBaseActivityBindVM<DB extends ViewDataBinding, VM extends FrameBaseViewModel> extends FrameBaseActivityBind<DB> {
 
     protected VM vm;
 

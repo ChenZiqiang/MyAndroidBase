@@ -9,11 +9,11 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder;
  * @version 1.0
  * @date 2020/9/29
  */
-public class BaseDataViewHolder<DB extends ViewDataBinding> extends BaseViewHolder {
+public class FrameBaseViewHolder<DB extends ViewDataBinding> extends BaseViewHolder {
 
     public DB binding;
 
-    public BaseDataViewHolder(DB binding) {
+    public FrameBaseViewHolder(DB binding) {
         super(binding.getRoot());
         this.binding = binding;
     }
