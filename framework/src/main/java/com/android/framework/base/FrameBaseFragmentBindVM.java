@@ -25,9 +25,9 @@ public abstract class FrameBaseFragmentBindVM<DB extends ViewDataBinding, VM ext
     }
 
     public Class<? extends VM> getViewModelClazz() {
+        //注意！！默认通过反射获取ViewModel的class，如果对稳定性与性能有要求，请在子类中重写此方法，返回viewmodel的class
         Type type = getClass().getGenericSuperclass();
         Type[] types = ((ParameterizedType) type).getActualTypeArguments();
         return (Class<? extends VM>) types[1];
-        //注意！！默认通过反射获取ViewModel的class，如果对稳定性与性能有要求，请在子类中重写此方法，返回viewmodel的class
     }
 }

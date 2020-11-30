@@ -20,6 +20,10 @@ public class MainActivity extends FrameBaseActivityBindVM<ActivityMainBinding, M
 
     }
 
+//    @Override
+//    public Class<? extends MainViewModel> getViewModelClazz() {
+//        return MainViewModel.class;
+//    }
 
     public void onDialog() {
         vm.showTip();

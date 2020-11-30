@@ -35,7 +35,7 @@ public abstract class FrameBaseActivity extends AppCompatActivity {
     protected Context mContext;
     protected String TAG;
     private boolean firstComplete = true;
-    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,7 +173,6 @@ public abstract class FrameBaseActivity extends AppCompatActivity {
      *
      * @param activity 目标Activity
      * @param bundle   数据
-     *
      */
     @Deprecated
     protected void jumpActivity(Class<?> activity, Bundle bundle, int requestCode) {
