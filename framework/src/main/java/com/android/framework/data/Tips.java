@@ -8,6 +8,14 @@ import com.kongzue.dialog.v3.TipDialog;
  * @date 2020/11/27
  */
 public class Tips {
+    public Tips() {
+    }
+
+    public Tips(String msg, TipDialog.TYPE type) {
+        this.msg = msg;
+        this.type = type;
+    }
+
     private String msg;
     private TipDialog.TYPE type;
 

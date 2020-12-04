@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.android.framework.data.Tips;
+import com.kongzue.dialog.v3.TipDialog;
 
 /**
  * view model 基类
@@ -18,6 +19,7 @@ public class FrameBaseViewModel extends ViewModel {
     private MutableLiveData<String> showTip = new MutableLiveData<>();
     private MutableLiveData<String> dismissTip = new MutableLiveData<>();
     private MutableLiveData<Tips> tips = new MutableLiveData<>();
+
     public MutableLiveData<String> getShowTip() {
         return showTip;
     }
@@ -44,6 +46,14 @@ public class FrameBaseViewModel extends ViewModel {
 
     public void showTip(String msg) {
         showTip.postValue(msg);
+    }
+
+    public void shotTip(Tips tips) {
+        this.tips.postValue(tips);
+    }
+
+    public void shotTip(String msg, TipDialog.TYPE type) {
+        tips.postValue(new Tips(msg, type));
     }
 
     public void dismissTip() {

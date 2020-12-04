@@ -17,6 +17,8 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.framework.R;
 import com.android.framework.base.BaseApplication;
 import com.luck.picture.lib.PictureSelector;
@@ -50,6 +52,40 @@ public class PictureSelectorUtils {
     public static ArrayList<String> delPath = new ArrayList<>();
     public static int[] qualitys = new int[]{90, 80, 70, 60, 50, 40, 30, 20};
     public static ArrayList<Bitmap> bitmaps = new ArrayList<>();
+
+
+    /**
+     * 单选图片回调最终处理
+     *
+     * @param localMedia
+     * @return
+     */
+    public static String singleSelectResult(LocalMedia localMedia) {
+        if (localMedia.isCompressed() && !TextUtils.isEmpty(localMedia.getCompressPath())) {
+            return localMedia.getCompressPath();
+        } else if (!TextUtils.isEmpty(localMedia.getCutPath())) {
+            return localMedia.getCutPath();
+        } else if (android.os.Build.VERSION.SDK_INT >= 29 && !TextUtils.isEmpty(localMedia.getAndroidQToPath())) {
+            return qualityCompress(localMedia.getAndroidQToPath());
+        }
+
+        return qualityCompress(localMedia.getPath());
+    }
+
+    /**
+     * 多选图片回调最终处理
+     *
+     * @param list
+     * @return
+     */
+    public static List<String> multipleSelectResult(List<LocalMedia> list) {
+        List<String> imgList = new ArrayList<>();
+        for (LocalMedia media : list) {
+            String path = singleSelectResult(media);
+            imgList.add(path);
+        }
+        return imgList;
+    }
 
     /**
      * 单选图片，带比例裁剪
@@ -244,47 +280,13 @@ public class PictureSelectorUtils {
     }
 
     /**
-     * 单选图片处理
-     *
-     * @param localMedia
-     * @return
-     */
-    public static String singleSelectResult(LocalMedia localMedia) {
-        if (localMedia.isCompressed() && !TextUtils.isEmpty(localMedia.getCompressPath())) {
-            return localMedia.getCompressPath();
-        } else if (!TextUtils.isEmpty(localMedia.getCutPath())) {
-            return localMedia.getCutPath();
-        } else if (android.os.Build.VERSION.SDK_INT >= 29 && !TextUtils.isEmpty(localMedia.getAndroidQToPath())) {
-            return qualityCompress(localMedia.getAndroidQToPath());
-        }
-
-        return qualityCompress(localMedia.getPath());
-    }
-
-
-    /**
-     * 多选图片处理
-     *
-     * @param list
-     * @return
-     */
-    public static List<String> multipleSelectResult(List<LocalMedia> list) {
-        List<String> imgList = new ArrayList<>();
-        for (LocalMedia media : list) {
-            String path = singleSelectResult(media);
-            imgList.add(path);
-        }
-        return imgList;
-    }
-
-    /**
      * 多选图片，没有裁剪
      *
      * @param activity
      * @param resultCode
      */
     public static void pictureMultipleSelect(Activity activity, int resultCode) {
-        pictureMultipleSelect(activity, resultCode, null,6);
+        pictureMultipleSelect(activity, resultCode, null, 6);
     }
 
     /**
@@ -397,7 +399,7 @@ public class PictureSelectorUtils {
             newpath = BaseApplication.getContext().getExternalFilesDir("bxsfile").getAbsolutePath();
         } else {
             newpath = BaseApplication.getContext().getFilesDir().getAbsolutePath() + "bxsfile";
-            
+
         }
         File fileNewDir = new File(newpath);
         if (!fileNewDir.exists()) {
@@ -433,6 +435,7 @@ public class PictureSelectorUtils {
         }
         return result;
     }
+
     /**
      * 获取文件的实际路径
      *
@@ -546,4 +549,42 @@ public class PictureSelectorUtils {
         return null;
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // 展示图片
+    ///////////////////////////////////////////////////////////////////////////
+    public static void showImageList(Activity mActivity, List<String> list, int position) {
+        List<LocalMedia> medias = new ArrayList<>();
+        for (String string : list) {
+            LocalMedia media = new LocalMedia();
+            media.setPath(string);
+            medias.add(media);
+        }
+        showImageMedia(mActivity, medias, position);
+    }
+
+    public static void showImageMedia(Activity mActivity, List<LocalMedia> medias, int position) {
+        PictureSelector.create(mActivity)
+                .themeStyle(R.style.picture_default_style)
+                .isNotPreviewDownload(true)
+                .imageEngine(GlideEngine.createGlideEngine()) // 请参考Demo GlideEngine.java
+                .openExternalPreview(position, medias);
+    }
+
+    public static void showImageList(Fragment mFragment, List<String> list, int position) {
+        List<LocalMedia> medias = new ArrayList<>();
+        for (String string : list) {
+            LocalMedia media = new LocalMedia();
+            media.setPath(string);
+            medias.add(media);
+        }
+        showImageMedia(mFragment, medias, position);
+    }
+
+    public static void showImageMedia(Fragment mFragment, List<LocalMedia> medias, int position) {
+        PictureSelector.create(mFragment)
+                .themeStyle(R.style.picture_default_style)
+                .isNotPreviewDownload(true)
+                .imageEngine(GlideEngine.createGlideEngine()) // 请参考Demo GlideEngine.java
+                .openExternalPreview(position, medias);
+    }
 }
