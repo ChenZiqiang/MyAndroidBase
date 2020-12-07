@@ -25,7 +25,6 @@ public abstract class BaseCallBack<T> extends StringCallback {
     protected String TAG = "HttpResult";
     protected Gson gson;
 
-
     protected BaseHttpBean<T> baseBean;
     protected boolean isList;
     public Class<T> tClass;
@@ -57,31 +56,40 @@ public abstract class BaseCallBack<T> extends StringCallback {
                 baseBean = gson.fromJson(body, BaseHttpBean.class);
             }
             if (baseBean != null) {
-                httpSuccess(baseBean.data);
+                if (isSuccess(baseBean)) {
+                    httpSuccess(baseBean.data);
+                } else {
+                    onResultError(baseBean.code, baseBean.msg);
+                }
             } else {
-                onResultError(BaseHttpCode.ERROR_JSON,"解析失败");
+                onResultError(BaseHttpCode.ERROR_JSON, "解析失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
             if (tClass != null) {
                 try {
-                    if (isList) {
-                        JsonObject jsonObject = JsonParser.parseString(body).getAsJsonObject();
-                        JsonArray jsonArray = jsonObject.getAsJsonArray("data");
-                        List<T> list = getObjectList(jsonArray, tClass);
-                        onListSuccess(list);
-                    } else {
-                        JSONObject object = new JSONObject(body);
-                        String data = object.getString("data");
-                        T t = gson.fromJson(data, tClass);
-                        httpSuccess(t);
+                    baseBean = gson.fromJson(body, BaseHttpBean.class);
+                    if (isSuccess(baseBean)) {
+                        if (isList) {
+                            JsonObject jsonObject = JsonParser.parseString(body).getAsJsonObject();
+                            JsonArray jsonArray = jsonObject.getAsJsonArray("data");
+                            List<T> list = getObjectList(jsonArray, tClass);
+                            onListSuccess(list);
+                        } else {
+                            JSONObject object = new JSONObject(body);
+                            String data = object.getString("data");
+                            T t = gson.fromJson(data, tClass);
+                            httpSuccess(t);
+                        }
+                    }else {
+                        onResultError(baseBean.code, baseBean.msg);
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    onResultError(BaseHttpCode.ERROR_JSON,"解析失败");
+                    onResultError(BaseHttpCode.ERROR_JSON, "解析失败");
                 }
             } else {
-                onResultError(BaseHttpCode.ERROR_JSON,"解析失败");
+                onResultError(BaseHttpCode.ERROR_JSON, "解析失败");
             }
         }
     }
@@ -89,12 +97,14 @@ public abstract class BaseCallBack<T> extends StringCallback {
     @Override
     public void onError(Response<String> response) {
         super.onError(response);
-        onResultError(BaseHttpCode.ERROR_NET,response.body());
+        onResultError(BaseHttpCode.ERROR_NET, response.body());
     }
+
+    public abstract boolean isSuccess(BaseHttpBean<T> baseBean);
 
     public abstract void onResultError(int code, String msg);
 
-    public abstract void httpSuccess(T t);
+    public abstract void httpSuccess(T data);
 
     public Type getType() {
         try {
