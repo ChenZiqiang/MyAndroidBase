@@ -38,12 +38,17 @@ public class UpFilesTool {
         }
 
         for (File file : upList) {
-            OkGo.<String>post(url).upFile(file).execute(new BaseCallBack() {
+            OkGo.<String>post(url).upFile(file).execute(new BaseCallBack<String>() {
                 @Override
                 public void onFinish() {
                     super.onFinish();
                     fileList.remove(file);
                     upList.remove(file);
+                }
+
+                @Override
+                public boolean isSuccess(BaseHttpBean<String> baseBean) {
+                    return true;
                 }
 
                 @Override
@@ -57,7 +62,7 @@ public class UpFilesTool {
                 }
 
                 @Override
-                public void httpSuccess(Object o) {
+                public void httpSuccess(String data) {
                     if (CommonTool.isListEmpty(upList) && !CommonTool.isListEmpty(upList)) {
                         UpFiles();
                     } else if (CommonTool.isListEmpty(upList) && CommonTool.isListEmpty(upList)) {
@@ -66,6 +71,8 @@ public class UpFilesTool {
                         }
                     }
                 }
+
+
             });
         }
     }
