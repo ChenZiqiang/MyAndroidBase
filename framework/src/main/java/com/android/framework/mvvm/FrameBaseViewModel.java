@@ -48,11 +48,11 @@ public class FrameBaseViewModel extends ViewModel {
         showTip.postValue(msg);
     }
 
-    public void shotTip(Tips tips) {
+    public void showTip(Tips tips) {
         this.tips.postValue(tips);
     }
 
-    public void shotTip(String msg, TipDialog.TYPE type) {
+    public void showTip(String msg, TipDialog.TYPE type) {
         tips.postValue(new Tips(msg, type));
     }
 
