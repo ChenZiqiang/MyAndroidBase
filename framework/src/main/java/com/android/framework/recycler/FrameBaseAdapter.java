@@ -44,7 +44,13 @@ public abstract class FrameBaseAdapter<T, DB extends ViewDataBinding> extends Ba
         }
         if (checkAdapterView(viewType)) {
             DB DB = DataBindingHelper.inflate(parent, layoutResId);
-            return new FrameBaseViewHolder<DB>(DB);
+            FrameBaseViewHolder<DB> viewHolder = new FrameBaseViewHolder<>(DB);
+            bindViewClickListener(viewHolder, viewType);
+            onItemViewHolderCreated(viewHolder, viewType);
+//            mDraggableModule.initView(viewHolder);
+//            baseViewHolder = viewHolder;
+
+            return viewHolder;
         } else {
             return super.onCreateViewHolder(parent, viewType);
         }
