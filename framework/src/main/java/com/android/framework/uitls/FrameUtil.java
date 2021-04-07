@@ -17,7 +17,7 @@ import org.litepal.LitePal;
 public class FrameUtil {
     public static void init(Application context, final boolean debug) {
         ViewTools.init(context);
-        SPUtils.getInstance(context);
+        SPUtils.init(context, context.getPackageName());
         LitePal.initialize(context);
         OkGo.getInstance().init(context);
         Logger.addLogAdapter(new AndroidLogAdapter() {

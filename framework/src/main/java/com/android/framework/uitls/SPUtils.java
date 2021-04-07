@@ -19,15 +19,7 @@ public class SPUtils {
     private static SharedPreferences sp;
     private static SharedPreferences.Editor editor;
 
-    public static void setSpName(String spName) {
-        SP_NAME = spName;
-    }
-
-    public static SPUtils getInstance(Context mContext) {
-        return getInstance(mContext, SP_NAME);
-    }
-
-    public static SPUtils getInstance(Context mContext, String spName) {
+    public static SPUtils getInstance() {
         if (instance == null) {
             synchronized (SPUtils.class) {
                 if (instance == null) {
@@ -35,7 +27,6 @@ public class SPUtils {
                 }
             }
         }
-        initSP(mContext, spName);
         return instance;
     }
 
@@ -45,7 +36,7 @@ public class SPUtils {
      * @param context
      * @param fileName
      */
-    private static void initSP(Context context, String fileName) {
+    public static void init(Context context, String fileName) {
         if (context == null) {
             return;
         }

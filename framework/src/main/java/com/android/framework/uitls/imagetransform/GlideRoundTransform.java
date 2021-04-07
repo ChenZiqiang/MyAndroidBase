@@ -15,6 +15,7 @@ import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
 import java.security.MessageDigest;
 
 /**
+ * 圆形图片
  * @author 陈自强
  */
 public class GlideRoundTransform extends BitmapTransformation {

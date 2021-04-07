@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -44,6 +45,8 @@ import static com.luck.picture.lib.tools.PictureFileUtils.isGooglePhotosUri;
 import static com.luck.picture.lib.tools.PictureFileUtils.isMediaDocument;
 
 /**
+ * 图片选择器处理工具类
+ *
  * @author 陈自强
  * @version 1.0
  * @date 2020/9/27
@@ -53,6 +56,15 @@ public class PictureSelectorUtils {
     public static int[] qualitys = new int[]{90, 80, 70, 60, 50, 40, 30, 20};
     public static ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
+    /**
+     * 获取图片回调结果
+     *
+     * @param data
+     * @return
+     */
+    public static List<LocalMedia> selectResult(Intent data) {
+        return PictureSelector.obtainMultipleResult(data);
+    }
 
     /**
      * 单选图片回调最终处理
@@ -85,6 +97,16 @@ public class PictureSelectorUtils {
             imgList.add(path);
         }
         return imgList;
+    }
+
+    /**
+     * 单选图片，默认不裁剪
+     *
+     * @param activity
+     * @param resultCode
+     */
+    public static void pictureSingleSelect(Activity activity, int resultCode) {
+        pictureSingleSelect(activity, resultCode, false);
     }
 
     /**
@@ -178,16 +200,6 @@ public class PictureSelectorUtils {
                 //.videoQuality()// 视频录制质量 0 or 1
                 // 结果回调onActivityResult code
                 .forResult(resultCode);
-    }
-
-    /**
-     * 单选图片，默认不裁剪
-     *
-     * @param activity
-     * @param resultCode
-     */
-    public static void pictureSingleSelect(Activity activity, int resultCode) {
-        pictureSingleSelect(activity, resultCode, false);
     }
 
     /**

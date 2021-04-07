@@ -43,6 +43,7 @@ public abstract class FrameBaseActivity extends AppCompatActivity {
         mContext = this;
         TAG = CommonTool.getSimpleActivityName(mContext);
         Logger.t("ActivityName").i(TAG);
+
     }
 
     /**
