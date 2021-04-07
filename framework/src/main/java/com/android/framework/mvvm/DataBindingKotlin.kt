@@ -1,8 +1,5 @@
 package com.android.framework.mvvm
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.graphics.Outline
 import android.text.TextUtils
 import android.view.View
@@ -18,7 +15,7 @@ import com.bumptech.glide.Glide
  * @date 2021/4/7/0007
  * Description:
  */
-class DataBindingKotlin {
+object DataBindingKotlin {
 
 
     /**
@@ -29,6 +26,7 @@ class DataBindingKotlin {
      * @param imageView ImageView
      * @param url       图片地址
      */
+    @JvmStatic
     @BindingAdapter("loadImageUrl")
     fun loadImage(imageView: ImageView, url: String?) {
         Glide.get(imageView.context).clearMemory()
@@ -40,12 +38,23 @@ class DataBindingKotlin {
         }
     }
 
+    @JvmStatic
+    @BindingAdapter("loadImageUrl")
+    fun loadImage(imageView: ImageView, resId: Int?) {
+        Glide.get(imageView.context).clearMemory()
+        Glide.with(imageView.context).load(resId)
+                .load(R.drawable.icon_loading)
+                .error(R.mipmap.icon_default_error)
+                .into(imageView)
+    }
+
     /**
      * 任意View裁剪圆角
      *
      * @param view 要裁剪的View
      * @param roundDP 圆角度数，单位为DP，
      */
+    @JvmStatic
     @BindingAdapter("cutViewRound")
     fun cutViewRound(view: View, roundDP: Int) {
         view.clipToOutline = true
