@@ -2,6 +2,7 @@ package com.android.base;
 
 import com.android.framework.base.BaseApplication;
 import com.android.framework.uitls.FrameUtil;
+import com.android.framework.uitls.MyFrameWork;
 
 /**
  * @author 陈自强
@@ -12,6 +13,6 @@ public class MyApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        FrameUtil.init(this,true);
+        MyFrameWork.init(this,BuildConfig.DEBUG);
     }
 }

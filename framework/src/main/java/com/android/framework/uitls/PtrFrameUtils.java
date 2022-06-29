@@ -38,7 +38,7 @@ public class PtrFrameUtils {
      * @param mContext
      * @return
      */
-    private static MaterialHeader defaultMateriaHeader(Context mContext) {
+    public static MaterialHeader defaultMateriaHeader(Context mContext) {
         MaterialHeader materialHeader = new MaterialHeader(mContext);
         materialHeader.setPadding(0, 20, 0, 20);
         return materialHeader;
@@ -50,7 +50,7 @@ public class PtrFrameUtils {
      * @param pullLayout 上下拉控件
      * @param mContext   上下文
      */
-    private static void setDefaultFooter(PtrFrameLayout pullLayout, Context mContext) {
+    public static void setDefaultFooter(PtrFrameLayout pullLayout, Context mContext) {
         pullLayout.setDurationToCloseFooter(500);
         MaterialHeader loadMoreView = defaultMateriaHeader(mContext);
         loadMoreView.setPadding(0, 10, 0, 20);
@@ -66,19 +66,4 @@ public class PtrFrameUtils {
         return PtrDefaultHandler2.checkContentCanBePulledDown(frame, content, header);
     }
 
-    /**
-     * 上拉下拉设置，data binding 暂时没有用
-     *
-     * @param pullLayout
-     * @param type       0为上拉加载和下拉刷新功能都有，1为只有上拉加载功能，2为只有下拉刷新功能
-     */
-    @BindingAdapter({"setPtrFrame"})
-    public static void setPtrFrameType(PtrFrameLayout pullLayout, int type) {
-        if (type == MODEL_LOAD_REFRESH || type == MODEL_LOAD) {
-            PtrFrameUtils.setDefaultFooter(pullLayout, pullLayout.getContext());
-        }
-        if (type == MODEL_LOAD_REFRESH || type == MODEL_REFRESH) {
-            PtrFrameUtils.setDefaultHeader(pullLayout, pullLayout.getContext());
-        }
-    }
 }

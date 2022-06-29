@@ -1,7 +1,8 @@
 package com.android.framework.mvvm
 
+import `in`.srain.cube.views.ptr.PtrDefaultHandler
+import `in`.srain.cube.views.ptr.PtrFrameLayout
 import android.graphics.Outline
-import android.text.TextUtils
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.framework.R
+import com.android.framework.uitls.PtrFrameUtils
 import com.android.framework.uitls.ViewTools
 import com.bumptech.glide.Glide
 
@@ -158,4 +160,22 @@ object DataBindingKotlin {
         seGridAdapter(view, gridAdapter, spanCount)
     }
 
+
+    /**
+     * 上拉下拉设置，data binding 暂时没有用
+     *
+     * @param ptrLayout
+     * @param ptrType       0为上拉加载和下拉刷新功能都有，1为只有上拉加载功能，2为只有下拉刷新功能
+     */
+    @JvmStatic
+    @BindingAdapter(value = ["ptrType","ptrHandler"])
+    fun setPtrFrameType(ptrLayout: PtrFrameLayout, ptrType: Int, ptrHandler: PtrDefaultHandler) {
+        if (ptrType == PtrFrameUtils.MODEL_LOAD_REFRESH || ptrType == PtrFrameUtils.MODEL_LOAD) {
+            PtrFrameUtils.setDefaultFooter(ptrLayout, ptrLayout.context)
+        }
+        if (ptrType == PtrFrameUtils.MODEL_LOAD_REFRESH || ptrType == PtrFrameUtils.MODEL_REFRESH) {
+            PtrFrameUtils.setDefaultHeader(ptrLayout, ptrLayout.context)
+        }
+        ptrLayout.setPtrHandler(ptrHandler)
+    }
 }

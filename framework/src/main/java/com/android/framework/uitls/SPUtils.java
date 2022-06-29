@@ -11,8 +11,9 @@ import java.util.Map;
 /**
  * SharedPreferences工具类
  * Created by 陈自强 on 2017/8/14 0014.
+ * 即将废弃，采用MMKV工具来进行存储
  */
-
+@Deprecated
 public class SPUtils {
     private static String SP_NAME = "Framework";
     private static SPUtils instance;

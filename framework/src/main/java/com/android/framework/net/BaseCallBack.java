@@ -24,7 +24,6 @@ import java.util.List;
 public abstract class BaseCallBack<T> extends StringCallback {
     protected String TAG = "HttpResult";
     protected Gson gson;
-
     protected BaseHttpBean<T> baseBean;
     protected boolean isList;
     public Class<T> tClass;

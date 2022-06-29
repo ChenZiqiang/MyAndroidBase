@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 /**
  * Fragment 管理
+ *
  * @author 陈自强
  * @date 2019/8/14
  */
@@ -18,7 +19,23 @@ public class FragmentMangerTool {
     public FragmentMangerTool(FragmentManager manager, int frameLayoutId) {
         this.manager = manager;
         this.frameLayoutId = frameLayoutId;
+    }
 
+    public FragmentMangerTool(FragmentManager manager) {
+        this.manager = manager;
+    }
+
+    public int getFrameLayoutId() {
+        return frameLayoutId;
+    }
+
+    public void setFrameLayoutId(int frameLayoutId) {
+        this.frameLayoutId = frameLayoutId;
+    }
+
+    public void addOrShowFragment(Fragment fragment, int frameLayoutId) {
+        setFrameLayoutId(frameLayoutId);
+        addOrShowFragment(fragment);
     }
 
     public void addOrShowFragment(Fragment fragment) {
@@ -76,4 +93,10 @@ public class FragmentMangerTool {
             }
         }
     }
+
+    public void showFragment(int frameLayoutId){
+        setFrameLayoutId(frameLayoutId);
+        showFragment();
+    }
+
 }

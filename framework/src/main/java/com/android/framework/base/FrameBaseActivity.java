@@ -182,13 +182,13 @@ public abstract class FrameBaseActivity extends AppCompatActivity {
         startActivityForResult(starter, requestCode);
 
         // 新跳转方法
-        /*ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+        /*ActivityResultLauncher<Intent> launcher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
 
                 });
         Intent intent = new Intent(this,activity);
-        someActivityResultLauncher.launch(intent);*/
+        launcher.launch(intent);*/
     }
 
 
