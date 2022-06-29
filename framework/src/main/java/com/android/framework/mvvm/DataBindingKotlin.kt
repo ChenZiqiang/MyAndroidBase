@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.framework.R
 import com.android.framework.uitls.ViewTools
 import com.bumptech.glide.Glide
@@ -16,7 +19,6 @@ import com.bumptech.glide.Glide
  * Description:
  */
 object DataBindingKotlin {
-
 
     /**
      * 1.加载图片,无需手动调用此方法
@@ -29,23 +31,22 @@ object DataBindingKotlin {
     @JvmStatic
     @BindingAdapter("loadImageUrl")
     fun loadImage(imageView: ImageView, url: String?) {
-        Glide.get(imageView.context).clearMemory()
-        if (!TextUtils.isEmpty(url)) {
-            Glide.with(imageView.context).load(url)
-                    .load(R.drawable.icon_loading)
-                    .error(R.mipmap.icon_default_error)
-                    .into(imageView)
-        }
+        loadImage(imageView, url)
     }
 
     @JvmStatic
-    @BindingAdapter("loadImageUrl")
+    @BindingAdapter("loadImageRes")
     fun loadImage(imageView: ImageView, resId: Int?) {
+        loadImage(imageView, resId)
+    }
+
+    @JvmStatic
+    private fun loadImage(imageView: ImageView, res: Any) {
         Glide.get(imageView.context).clearMemory()
-        Glide.with(imageView.context).load(resId)
-                .load(R.drawable.icon_loading)
-                .error(R.mipmap.icon_default_error)
-                .into(imageView)
+        Glide.with(imageView.context).load(res)
+            .load(R.drawable.icon_loading)
+            .error(R.mipmap.icon_default_error)
+            .into(imageView)
     }
 
     /**
@@ -60,9 +61,101 @@ object DataBindingKotlin {
         view.clipToOutline = true
         view.outlineProvider = object : ViewOutlineProvider() {
             override fun getOutline(view: View, outline: Outline) {
-                outline.setRoundRect(0, 0, view.width, view.height, ViewTools.dp2px(roundDP.toFloat()).toFloat())
+                outline.setRoundRect(
+                    0,
+                    0,
+                    view.width,
+                    view.height,
+                    ViewTools.dp2px(roundDP.toFloat()).toFloat()
+                )
             }
         }
+    }
+
+
+    /**
+     * RecyclerView 设置Adapter
+     * @param linearAdapter 设置adapter同时设置LinearLayoutManager
+     * @param orientation 设置方向
+     */
+    @JvmStatic
+    private fun setLinearAdapter(
+        view: RecyclerView,
+        linearAdapter: RecyclerView.Adapter<*>,
+        orientation: Int = RecyclerView.VERTICAL
+    ) {
+        val manager = LinearLayoutManager(view.context)
+        manager.orientation = orientation
+        view.layoutManager = manager
+        view.adapter = linearAdapter
+    }
+
+    @JvmStatic
+    @BindingAdapter(value = ["linearAdapter", "orientation"])
+    fun setRecyclerLinearAdapter(
+        view: RecyclerView, linearAdapter: RecyclerView.Adapter<*>, orientation: Int
+    ) {
+        setLinearAdapter(view, linearAdapter, orientation)
+    }
+
+    @JvmStatic
+    @BindingAdapter(value = ["linearAdapter"])
+    fun setRecyclerLinearAdapter(view: RecyclerView, linearAdapter: RecyclerView.Adapter<*>) {
+        setLinearAdapter(view, linearAdapter)
+    }
+
+    /**
+     * RecyclerView 设置Adapter
+     * @param gridAdapter 设置adapter同时设置LinearLayoutManager
+     * @param spanCount 设置格数
+     * @param orientation 设置方向
+     */
+    @JvmStatic
+    private fun seGridAdapter(
+        view: RecyclerView,
+        gridAdapter: RecyclerView.Adapter<*>,
+        spanCount: Int,
+        orientation: Int = RecyclerView.VERTICAL,
+        reverseLayout: Boolean = false
+    ) {
+        val manager = GridLayoutManager(view.context, spanCount)
+        manager.orientation = orientation
+        manager.reverseLayout = reverseLayout
+        view.layoutManager = manager
+        view.adapter = gridAdapter
+    }
+
+    @JvmStatic
+    @BindingAdapter(
+        value = ["gridAdapter", "spanCount", "orientation", "reverseLayout"]
+    )
+    fun setRecyclerGridAdapter(
+        view: RecyclerView,
+        gridAdapter: RecyclerView.Adapter<*>,
+        spanCount: Int,
+        orientation: Int,
+        reverseLayout: Boolean
+    ) {
+        seGridAdapter(view, gridAdapter, spanCount, orientation, reverseLayout)
+    }
+
+    @JvmStatic
+    @BindingAdapter(value = ["gridAdapter", "spanCount", "orientation"])
+    fun setRecyclerGridAdapter(
+        view: RecyclerView,
+        gridAdapter: RecyclerView.Adapter<*>,
+        spanCount: Int,
+        orientation: Int,
+    ) {
+        seGridAdapter(view, gridAdapter, spanCount, orientation)
+    }
+
+    @JvmStatic
+    @BindingAdapter(value = ["gridAdapter", "spanCount"])
+    fun setRecyclerGridAdapter(
+        view: RecyclerView, gridAdapter: RecyclerView.Adapter<*>, spanCount: Int
+    ) {
+        seGridAdapter(view, gridAdapter, spanCount)
     }
 
 }

@@ -6,19 +6,21 @@ import com.kongzue.dialog.util.DialogSettings;
 import com.lzy.okgo.OkGo;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.tencent.mmkv.MMKV;
 
 import org.litepal.LitePal;
 
 /**
- * 简单的初始化
- *
+ * 简单初始化
  * @author 陈自强
+ * @version 1.0
+ * @date 2022/6/28
  */
-@Deprecated
-public class FrameUtil {
+public class MyFrameWork {
+
     public static void init(Application context, final boolean debug) {
         ViewTools.init(context);
-        SPUtils.init(context, context.getPackageName());
+        MMKV.initialize(context);
         LitePal.initialize(context);
         OkGo.getInstance().init(context);
         Logger.addLogAdapter(new AndroidLogAdapter() {
