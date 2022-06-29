@@ -46,6 +46,7 @@ dependencies {
     api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     api 'com.google.android.material:material:1.6.1'
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.21"
     //Recycler view 弹性布局适配器 https://github.com/google/flexbox-layout
     api 'com.google.android:flexbox:2.0.1'
     //日志打印 https://github.com/orhanobut/logger
