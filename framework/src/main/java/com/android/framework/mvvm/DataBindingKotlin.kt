@@ -2,10 +2,15 @@ package com.android.framework.mvvm
 
 import `in`.srain.cube.views.ptr.PtrDefaultHandler
 import `in`.srain.cube.views.ptr.PtrFrameLayout
+import android.graphics.Bitmap
 import android.graphics.Outline
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
+import androidx.annotation.Nullable
+import androidx.annotation.RawRes
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,21 +37,39 @@ object DataBindingKotlin {
      */
     @JvmStatic
     @BindingAdapter("loadImageUrl")
-    fun loadImage(imageView: ImageView, url: String?) {
-        loadImage(imageView, url)
+    fun loadImage(imageView: ImageView, url: String) {
+        loadImageAny(imageView, url)
     }
 
     @JvmStatic
     @BindingAdapter("loadImageRes")
-    fun loadImage(imageView: ImageView, resId: Int?) {
-        loadImage(imageView, resId)
+    fun loadImage(imageView: ImageView,resId: Int) {
+        loadImageAny(imageView, resId)
     }
 
     @JvmStatic
-    private fun loadImage(imageView: ImageView, res: Any) {
+    @BindingAdapter("loadImageBitMap")
+    fun loadImage(imageView: ImageView, bitmap: Bitmap) {
+        loadImageAny(imageView, bitmap)
+    }
+
+    @JvmStatic
+    @BindingAdapter("loadImageDrawable")
+    fun loadImage(imageView: ImageView, drawable: Drawable) {
+        loadImageAny(imageView, drawable)
+    }
+
+    @JvmStatic
+    @BindingAdapter("loadImageByte")
+    fun loadImage(imageView: ImageView, byte: Byte) {
+        loadImageAny(imageView, byte)
+    }
+
+    @JvmStatic
+    private fun loadImageAny(imageView: ImageView, res: Any) {
         Glide.get(imageView.context).clearMemory()
         Glide.with(imageView.context).load(res)
-            .load(R.drawable.icon_loading)
+            .placeholder(R.drawable.icon_loading)
             .error(R.mipmap.icon_default_error)
             .into(imageView)
     }
@@ -168,7 +191,7 @@ object DataBindingKotlin {
      * @param ptrType       0为上拉加载和下拉刷新功能都有，1为只有上拉加载功能，2为只有下拉刷新功能
      */
     @JvmStatic
-    @BindingAdapter(value = ["ptrType","ptrHandler"])
+    @BindingAdapter(value = ["ptrType", "ptrHandler"])
     fun setPtrFrameType(ptrLayout: PtrFrameLayout, ptrType: Int, ptrHandler: PtrDefaultHandler) {
         if (ptrType == PtrFrameUtils.MODEL_LOAD_REFRESH || ptrType == PtrFrameUtils.MODEL_LOAD) {
             PtrFrameUtils.setDefaultFooter(ptrLayout, ptrLayout.context)

@@ -6,6 +6,9 @@
     <data>
 
         <variable
+            name="res"
+            type="Integer" />
+        <variable
             name="activity"
             type="com.android.base.MainActivity" />
 
@@ -24,6 +27,10 @@
         android:padding="15dp"
         tools:context=".MainActivity">
 
+        <ImageView
+            loadImageRes="@{res}"
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
