@@ -8,6 +8,7 @@ import androidx.multidex.MultiDex;
 import com.kongzue.dialog.util.BaseDialog;
 
 import org.litepal.LitePal;
+import org.litepal.LitePalApplication;
 import org.litepal.exceptions.GlobalException;
 
 /**
@@ -19,19 +20,13 @@ import org.litepal.exceptions.GlobalException;
  */
 public class BaseApplication extends Application {
     protected static BaseApplication instance;
-    public static Context sContext;
 
     public BaseApplication() {
-        sContext = this;
-        instance=this;
+        super();
+        instance = this;
+        LitePalApplication.sContext = this;
     }
 
-    public static Context getContext() {
-        if (sContext == null) {
-            throw new GlobalException(GlobalException.APPLICATION_CONTEXT_IS_NULL);
-        }
-        return sContext;
-    }
 
     public static BaseApplication getInstance() {
         if (instance == null) {
@@ -40,12 +35,18 @@ public class BaseApplication extends Application {
         return instance;
     }
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+    }
 
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(this);
-        LitePal.initialize(this);
+        LitePalApplication.sContext = base;
+        MultiDex.install(base);
+        LitePal.initialize(base);
     }
 
     @Override

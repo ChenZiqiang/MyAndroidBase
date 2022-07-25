@@ -74,7 +74,7 @@ android {
 
 dependencies {
     api fileTree(dir: "libs", include: ["*.jar"])
-    api 'androidx.appcompat:appcompat:1.6.0-alpha04'
+    api 'androidx.appcompat:appcompat:1.6.0-alpha05'
     api 'androidx.constraintlayout:constraintlayout:2.1.4'
     api 'androidx.multidex:multidex:2.0.1'
     api 'androidx.viewpager2:viewpager2:1.1.0-beta01'
@@ -87,7 +87,7 @@ dependencies {
     //日志打印 https://github.com/orhanobut/logger
     api 'com.orhanobut:logger:2.2.0'
     //数据库框架 https://github.com/LitePalFramework/LitePal
-    api 'org.litepal.guolindev:core:3.2.3'
+    api 'org.litepal.android:java:3.0.0'
     //下拉刷新 上拉加载  https://github.com/captainbupt/android-Ultra-Pull-To-Refresh-With-Load-More/blob/master/README-cn.md
     api 'in.srain.cube:ptr-load-more:1.0.6'
     //网络请求框架，GIT帮助地址：https://github.com/jeasonlzy/okhttp-OkGo/wiki
