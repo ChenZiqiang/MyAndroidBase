@@ -17,23 +17,23 @@ import org.litepal.LitePal;
  * @date 2020/10/19
  */
 public class BaseApplication extends Application {
-    private static BaseApplication instance;
+    protected static BaseApplication instance;
+    protected static Context mContext;
 
     public static BaseApplication getInstance() {
-        if (instance == null) {
-            synchronized (BaseApplication.class) {
-                if (instance == null) {
-                    instance = new BaseApplication();
-                }
-            }
-        }
         return instance;
+    }
+
+    public static Context getContext() {
+        return mContext;
     }
 
 
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+        instance = this;
+        mContext=this;
         MultiDex.install(this);
         LitePal.initialize(this);
     }
