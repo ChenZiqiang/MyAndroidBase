@@ -83,7 +83,7 @@ dependencies {
 
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.21"
     //Recycler view 弹性布局适配器 https://github.com/google/flexbox-layout
-    api 'com.google.android:flexbox:3.0.0'
+    api 'com.google.android.flexbox:flexbox:3.0.0'
     //日志打印 https://github.com/orhanobut/logger
     api 'com.orhanobut:logger:2.2.0'
     //数据库框架 https://github.com/LitePalFramework/LitePal
@@ -93,7 +93,7 @@ dependencies {
     //网络请求框架，GIT帮助地址：https://github.com/jeasonlzy/okhttp-OkGo/wiki
     api 'com.lzy.net:okgo:3.0.4'
     //沉浸式状态栏 基础依赖包，必须要依赖 https://github.com/gyf-dev/ImmersionBar
-    api 'com.gyf.immersionbar:immersionbar:3.2.2'
+    api 'com.geyifeng.immersionbar:immersionbar:3.2.2'
     //RecycleView适配器 https://github.com/CymChad/BaseRecyclerViewAdapterHelper
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7'
     // eventBus事件线程管理 https://github.com/greenrobot/EventBus

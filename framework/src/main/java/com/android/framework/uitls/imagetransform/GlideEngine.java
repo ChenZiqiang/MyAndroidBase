@@ -120,7 +120,6 @@ public class GlideEngine implements ImageEngine {
      * @param longImageView
      * @ 已废弃
      */
-    @Override
     public void loadImage(@NonNull Context context, @NonNull String url,
                           @NonNull final ImageView imageView,
                           final SubsamplingScaleImageView longImageView) {
@@ -190,7 +189,7 @@ public class GlideEngine implements ImageEngine {
      * @param url       图片路径
      * @param imageView 承载图片ImageView
      */
-    @Override
+
     public void loadAsGifImage(@NonNull Context context, @NonNull String url,
                                @NonNull ImageView imageView) {
         Glide.with(context)
