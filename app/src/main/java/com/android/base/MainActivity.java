@@ -1,23 +1,13 @@
 package com.android.base;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.base.databinding.ActivityMainBinding;
 import com.android.framework.base.FrameBaseActivityBindVM;
-import com.android.framework.mvvm.DataBindingKotlin;
 import com.android.framework.net.BaseCallBack;
 import com.android.framework.net.BaseHttpBean;
-import com.android.framework.net.BaseHttpHelper;
 import com.android.framework.uitls.GsonTools;
 import com.lzy.okgo.OkGo;
-import com.orhanobut.logger.Logger;
-
-import org.litepal.crud.callback.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +16,6 @@ import java.util.Map;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler2;
 import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler2;
 
 /**
  * 演示界面
@@ -38,7 +27,7 @@ public class MainActivity extends FrameBaseActivityBindVM<ActivityMainBinding, M
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView2(R.layout.activity_main);
+        bindContentView(R.layout.activity_main);
         binding.setActivity(this);
         testDataBindingRecyclerView();
         binding.setRes(R.mipmap.ic_launcher);

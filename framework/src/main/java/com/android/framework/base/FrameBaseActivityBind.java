@@ -21,7 +21,11 @@ public class FrameBaseActivityBind<DB extends ViewDataBinding> extends FrameBase
 
     }
 
-    public void setContentView2(int layoutResID) {
+    /**
+     * 采用DataBinding方案时，需用bindContentView代替setContentView
+     * @param layoutResID
+     */
+    public void bindContentView(int layoutResID) {
         binding = DataBindingUtil.setContentView(this, layoutResID);
     }
 }

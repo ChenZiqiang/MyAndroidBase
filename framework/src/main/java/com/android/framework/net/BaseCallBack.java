@@ -96,7 +96,7 @@ public abstract class BaseCallBack<T> extends StringCallback {
     @Override
     public void onError(Response<String> response) {
         super.onError(response);
-        onResultError(BaseHttpCode.ERROR_NET, response.body());
+        onResultError(BaseHttpCode.ERROR_NET, "网络请求失败");
     }
 
     public abstract boolean isSuccess(BaseHttpBean<T> baseBean);

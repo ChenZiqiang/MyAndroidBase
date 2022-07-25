@@ -55,6 +55,7 @@ public class PictureSelectorUtils {
     public static ArrayList<String> delPath = new ArrayList<>();
     public static int[] qualitys = new int[]{90, 80, 70, 60, 50, 40, 30, 20};
     public static ArrayList<Bitmap> bitmaps = new ArrayList<>();
+    public static String File_NAME = BaseApplication.getInstance().getPackageName();
 
     /**
      * 获取图片回调结果
@@ -144,8 +145,6 @@ public class PictureSelectorUtils {
                 //.closeAndroidQChangeVideoWH(!SdkVersionUtils.checkedAndroid_Q())// 关闭在AndroidQ下获取图片或视频宽高相反自动转换
                 .imageSpanCount(4)// 每行显示个数
                 .isReturnEmpty(true)// 未选择数据时点击按钮是否可以返回
-                .closeAndroidQChangeWH(true)//如果图片有旋转角度则对换宽高,默认为true
-                .closeAndroidQChangeVideoWH(!SdkVersionUtils.checkedAndroid_Q())// 如果视频有旋转角度则对换宽高,默认为false
                 //.isAndroidQTransform(false)// 是否需要处理Android Q 拷贝至应用沙盒的操作，只针对compress(false); && .isEnableCrop(false);有效,默认处理
                 .setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)// 设置相册Activity方向，不设置默认使用系统
 //                    .isOriginalImageControl(cb_original.isChecked())// 是否显示原图控制按钮，如果设置为true则用户可以自由选择是否使用原图，压缩、裁剪功能将会失效
@@ -224,8 +223,6 @@ public class PictureSelectorUtils {
                 .minSelectNum(1)// 最小选择数量
                 .imageSpanCount(4)// 每行显示个数
                 .isReturnEmpty(true)// 未选择数据时点击按钮是否可以返回
-                .closeAndroidQChangeWH(true)//如果图片有旋转角度则对换宽高,默认为true
-                .closeAndroidQChangeVideoWH(!SdkVersionUtils.checkedAndroid_Q())// 如果视频有旋转角度则对换宽高,默认为false
                 .setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)// 设置相册Activity方向，不设置默认使用系统
                 .selectionMode(PictureConfig.SINGLE)// 多选 or 单选
                 .isPreviewImage(true)// 是否可预览图片
@@ -323,8 +320,6 @@ public class PictureSelectorUtils {
                 .selectionData(list)
                 .imageSpanCount(4)// 每行显示个数
                 .isReturnEmpty(true)// 未选择数据时点击按钮是否可以返回
-                .closeAndroidQChangeWH(true)//如果图片有旋转角度则对换宽高,默认为true
-                .closeAndroidQChangeVideoWH(!SdkVersionUtils.checkedAndroid_Q())// 如果视频有旋转角度则对换宽高,默认为false
                 .setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)// 设置相册Activity方向，不设置默认使用系统
                 .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选
                 .isPreviewImage(true)// 是否可预览图片
@@ -351,10 +346,10 @@ public class PictureSelectorUtils {
         if (TextUtils.isEmpty(path)) {
             return path;
         }
-        if (BaseApplication.getContext() == null) {
+        if (BaseApplication.getInstance() == null) {
             return path;
         }
-        path = getRealFilePath(BaseApplication.getContext(), path);
+        path = getRealFilePath(BaseApplication.getInstance(), path);
         //判断大小
         long size = new File(path).length();
         long m = 1024 * 1024;
@@ -408,9 +403,9 @@ public class PictureSelectorUtils {
     public static String getMyDir() {
         String newpath = null;
         if (MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            newpath = BaseApplication.getContext().getExternalFilesDir("bxsfile").getAbsolutePath();
+            newpath = BaseApplication.getInstance().getExternalFilesDir(File_NAME).getAbsolutePath();
         } else {
-            newpath = BaseApplication.getContext().getFilesDir().getAbsolutePath() + "bxsfile";
+            newpath = BaseApplication.getInstance().getFilesDir().getAbsolutePath() + File_NAME;
 
         }
         File fileNewDir = new File(newpath);

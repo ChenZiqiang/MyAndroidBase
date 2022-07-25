@@ -3,7 +3,6 @@ package com.android.base;
 import android.app.Application;
 
 import com.android.framework.base.BaseApplication;
-import com.android.framework.uitls.FrameUtil;
 import com.android.framework.uitls.MyFrameWork;
 import com.android.framework.uitls.ViewTools;
 import com.kongzue.dialog.util.DialogSettings;
@@ -29,7 +28,8 @@ public class MyApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        init(this, BuildConfig.DEBUG);
+//        init(this, BuildConfig.DEBUG);
+        MyFrameWork.init(this,BuildConfig.DEBUG);
     }
 
     private void init(Application context, final boolean debug) {
