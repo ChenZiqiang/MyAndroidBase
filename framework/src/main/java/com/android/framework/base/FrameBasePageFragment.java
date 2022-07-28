@@ -12,9 +12,9 @@ import com.android.framework.mvvm.FrameBaseViewModel;
  * @date 2022/7/28
  */
 public abstract class FrameBasePageFragment<DB extends ViewDataBinding, VM extends FrameBaseViewModel> extends FrameBaseFragmentBindVM<DB, VM> {
-    private int page;
+    protected int page;
     private boolean isFirst = true;
-    private boolean created = false;
+    private boolean isCreated = false;
 
     public FrameBasePageFragment(int page) {
         this.page = page;
@@ -22,27 +22,35 @@ public abstract class FrameBasePageFragment<DB extends ViewDataBinding, VM exten
 
     @Override
     protected void onFragmentCreated() {
-        created = true;
+        isCreated = true;
         if (!isFirst) {
-            showPage(page);
-        }
-    }
-
-    public void showPage(int showPage) {
-        if (page == showPage && created) {
-            onShowFragment();
-        }
-    }
-
-    public void showPage(int showPage, boolean firstShow) {
-        if (firstShow && isFirst) {
-            isFirst = false;
-            showPage(showPage);
+            showFragmentPage(page, false);
         }
     }
 
     /**
-     * 懒加载
+     * viewpage 子fragment 懒加载
+     *
+     * @param showPage          做为第几个页面的判断
+     * @param alwaysRefreshData 是否每次都刷新数据，false为只刷新一次数据，true为每次滑到页面都刷新
      */
+    public void showFragmentPage(int showPage, boolean alwaysRefreshData) {
+        if (page != showPage || !isCreated) {
+            return;
+        }
+
+        if (isFirst) {
+            isFirst = false;
+            onShowFragment();
+            refreshData();
+            return;
+        }
+        if (alwaysRefreshData) {
+            refreshData();
+        }
+    }
+
     protected abstract void onShowFragment();
+
+    protected abstract void refreshData();
 }
