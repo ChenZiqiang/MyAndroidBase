@@ -76,19 +76,6 @@ public class MainActivity extends FrameBaseActivityBindVM<ActivityMainBinding, M
     public void onDialog() {
         testNet();
         vm.showTip();
-//        new Handler(Looper.myLooper()).postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                vm.showTip("test");
-//                new Handler(Looper.myLooper()).postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        vm.dismissTip();
-//                    }
-//                }, 2000);
-//            }
-//        }, 2000);
-
     }
 
     /**
@@ -119,23 +106,5 @@ public class MainActivity extends FrameBaseActivityBindVM<ActivityMainBinding, M
             }
         });
 
-
-//        BaseHttpHelper.onPost(url, new BaseCallBack<String>() {
-//
-//            @Override
-//            public boolean isSuccess(BaseHttpBean<String> baseBean) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onResultError(int code, String msg) {
-//                vm.dismissTip();
-//            }
-//
-//            @Override
-//            public void httpSuccess(String data) {
-//                vm.dismissTip();
-//            }
-//        });
     }
 }
