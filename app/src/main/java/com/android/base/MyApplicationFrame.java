@@ -2,7 +2,7 @@ package com.android.base;
 
 import android.app.Application;
 
-import com.android.framework.base.BaseApplication;
+import com.android.framework.base.FrameBaseApplication;
 import com.android.framework.uitls.MyFrameWork;
 import com.android.framework.uitls.ViewTools;
 import com.kongzue.dialog.util.DialogSettings;
@@ -24,7 +24,7 @@ import okhttp3.OkHttpClient;
  * @version 1.0
  * @date 2020/11/30
  */
-public class MyApplication extends BaseApplication {
+public class MyApplicationFrame extends FrameBaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();

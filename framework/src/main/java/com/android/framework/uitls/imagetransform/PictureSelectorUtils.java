@@ -21,12 +21,11 @@ import android.text.TextUtils;
 import androidx.fragment.app.Fragment;
 
 import com.android.framework.R;
-import com.android.framework.base.BaseApplication;
+import com.android.framework.base.FrameBaseApplication;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.luck.picture.lib.tools.SdkVersionUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -55,7 +54,7 @@ public class PictureSelectorUtils {
     public static ArrayList<String> delPath = new ArrayList<>();
     public static int[] qualitys = new int[]{90, 80, 70, 60, 50, 40, 30, 20};
     public static ArrayList<Bitmap> bitmaps = new ArrayList<>();
-    public static String File_NAME = BaseApplication.getInstance().getPackageName();
+    public static String File_NAME = FrameBaseApplication.getInstance().getPackageName();
 
     /**
      * 获取图片回调结果
@@ -346,10 +345,10 @@ public class PictureSelectorUtils {
         if (TextUtils.isEmpty(path)) {
             return path;
         }
-        if (BaseApplication.getInstance() == null) {
+        if (FrameBaseApplication.getInstance() == null) {
             return path;
         }
-        path = getRealFilePath(BaseApplication.getInstance(), path);
+        path = getRealFilePath(FrameBaseApplication.getInstance(), path);
         //判断大小
         long size = new File(path).length();
         long m = 1024 * 1024;
@@ -403,9 +402,9 @@ public class PictureSelectorUtils {
     public static String getMyDir() {
         String newpath = null;
         if (MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            newpath = BaseApplication.getInstance().getExternalFilesDir(File_NAME).getAbsolutePath();
+            newpath = FrameBaseApplication.getInstance().getExternalFilesDir(File_NAME).getAbsolutePath();
         } else {
-            newpath = BaseApplication.getInstance().getFilesDir().getAbsolutePath() + File_NAME;
+            newpath = FrameBaseApplication.getInstance().getFilesDir().getAbsolutePath() + File_NAME;
 
         }
         File fileNewDir = new File(newpath);

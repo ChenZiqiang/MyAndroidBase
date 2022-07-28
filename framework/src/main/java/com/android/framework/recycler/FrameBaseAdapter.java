@@ -47,8 +47,6 @@ public abstract class FrameBaseAdapter<T, DB extends ViewDataBinding> extends Ba
             FrameBaseViewHolder<DB> viewHolder = new FrameBaseViewHolder<>(DB);
             bindViewClickListener(viewHolder, viewType);
             onItemViewHolderCreated(viewHolder, viewType);
-//            mDraggableModule.initView(viewHolder);
-//            baseViewHolder = viewHolder;
 
             return viewHolder;
         } else {
@@ -74,7 +72,7 @@ public abstract class FrameBaseAdapter<T, DB extends ViewDataBinding> extends Ba
 
     @Override
     protected void convert(@NotNull FrameBaseViewHolder<DB> holder, T t) {
-        onBindItem(holder, holder.binding, t, holder.getBindingAdapterPosition());
+        onBindItem(holder, holder.binding, t, getItemPosition(t));
     }
 
     protected abstract void onBindItem(@NotNull FrameBaseViewHolder<DB> holder, DB binding, T data, int position);

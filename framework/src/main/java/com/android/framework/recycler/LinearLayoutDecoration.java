@@ -14,6 +14,7 @@ import com.android.framework.R;
 
 
 /**
+ * RecyclerView分割线
  * @author 陈自强
  * @date 2021/4/2/0002
  * Description:
