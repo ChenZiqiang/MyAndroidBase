@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.Outline
 import android.graphics.drawable.Drawable
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
@@ -201,4 +202,45 @@ object DataBindingKotlin {
         }
         ptrLayout.setPtrHandler(ptrHandler)
     }
+
+    @JvmStatic
+    @BindingAdapter("bind_marginBottom")
+    fun setLayoutMarginBottom(view: View, dimen: Int) {
+        (view.layoutParams as ViewGroup.MarginLayoutParams).let {
+            val margin = ViewTools.dp2px(dimen.toFloat())
+            it.bottomMargin = margin
+            view.layoutParams = it
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind_marginTop")
+    fun setLayoutMarginTop(view: View, dimen: Int) {
+        (view.layoutParams as ViewGroup.MarginLayoutParams).let {
+            val margin = ViewTools.dp2px(dimen.toFloat())
+            it.topMargin = margin
+            view.layoutParams = it
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind_marginStart")
+    fun setLayoutMarginStart(view: View, dimen: Int) {
+        (view.layoutParams as ViewGroup.MarginLayoutParams).let {
+            val margin = ViewTools.dp2px(dimen.toFloat())
+            it.marginStart = margin
+            view.layoutParams = it
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind_marginEnd")
+    fun setLayoutMarginEnd(view: View, dimen: Int) {
+        (view.layoutParams as ViewGroup.MarginLayoutParams).let {
+            val margin = ViewTools.dp2px(dimen.toFloat())
+            it.marginEnd = margin
+            view.layoutParams = it
+        }
+    }
+
 }

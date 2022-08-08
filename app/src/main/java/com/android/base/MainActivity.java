@@ -75,7 +75,7 @@ public class MainActivity extends FrameBaseActivityBindVM<ActivityMainBinding, M
 
     public void onDialog() {
         testNet();
-        vm.showTip();
+        model.showTip();
     }
 
     /**
@@ -97,12 +97,12 @@ public class MainActivity extends FrameBaseActivityBindVM<ActivityMainBinding, M
 
             @Override
             public void onResultError(int code, String msg) {
-                vm.dismissTip();
+                model.dismissTip();
             }
 
             @Override
             public void httpSuccess(String data) {
-                vm.dismissTip();
+                model.dismissTip();
             }
         });
 

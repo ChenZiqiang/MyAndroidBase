@@ -3,6 +3,7 @@ package com.android.framework.uitls;
 import android.app.Application;
 import android.text.TextUtils;
 
+import com.android.framework.net.BaseHttpHelper;
 import com.kongzue.dialog.util.DialogSettings;
 import com.lzy.okgo.OkGo;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -28,7 +29,7 @@ public class MyFrameWork {
      * @param debug 是否打印debug日志
      * @param logcatTag 日志输出TAG
      */
-    public static void init(Application app, final boolean debug, String logcatTag) {
+    public static void init(Application app, final boolean debug, String logcatTag,String baseUrl) {
         ViewTools.init(app);
         MMKVTools.init(app);
         LitePal.initialize(app);
@@ -46,14 +47,15 @@ public class MyFrameWork {
             }
         });
         initDialog(debug);
+        BaseHttpHelper.setBaseUrl(baseUrl);
     }
 
     public static void init(Application app, final boolean debug) {
-        init(app, debug, null);
+        init(app, debug, null,"");
     }
 
     public static void init(Application app) {
-        init(app, false, null);
+        init(app, false, null,"");
     }
 
     private static void initDialog(final boolean debug) {
@@ -64,4 +66,5 @@ public class MyFrameWork {
         DialogSettings.theme = DialogSettings.THEME.LIGHT;
         DialogSettings.autoShowInputKeyboard = true;
     }
+
 }

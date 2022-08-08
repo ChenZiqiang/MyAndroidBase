@@ -18,7 +18,7 @@ import java.lang.reflect.Type;
  */
 public abstract class FrameBaseActivityBindVM<DB extends ViewDataBinding, VM extends FrameBaseViewModel> extends FrameBaseActivityBind<DB> {
 
-    protected VM vm;
+    protected VM model;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,8 +27,8 @@ public abstract class FrameBaseActivityBindVM<DB extends ViewDataBinding, VM ext
     }
 
     private void createViewModel() {
-        vm = new ViewModelProvider(this).get(getViewModelClazz());
-        initDialogVM(vm);
+        model = new ViewModelProvider(this).get(getViewModelClazz());
+        initDialogVM(model);
     }
 
 

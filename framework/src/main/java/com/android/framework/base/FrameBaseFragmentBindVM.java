@@ -14,12 +14,12 @@ import java.lang.reflect.Type;
  * @date 2020/11/27
  */
 public abstract class FrameBaseFragmentBindVM<DB extends ViewDataBinding, VM extends FrameBaseViewModel> extends FrameBaseFragmentBind<DB> {
-    protected VM vm;
+    protected VM model;
 
     @Override
     public void createViewModel() {
-        vm = new ViewModelProvider(this).get(getViewModelClazz());
-        initDialogVM(vm);
+        model = new ViewModelProvider(this).get(getViewModelClazz());
+        initDialogVM(model);
     }
 
     public Class<? extends VM> getViewModelClazz() {
