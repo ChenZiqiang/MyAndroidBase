@@ -23,7 +23,7 @@ public abstract class FrameBasePageFragment<DB extends ViewDataBinding, VM exten
     @Override
     protected void onFragmentCreated() {
         isCreated = true;
-        if (!isFirst) {
+        if (isFirst) {
             showFragmentPage(page, false);
         }
     }
@@ -43,11 +43,12 @@ public abstract class FrameBasePageFragment<DB extends ViewDataBinding, VM exten
             isFirst = false;
             onShowFragment();
             refreshData();
-            return;
+        } else {
+            if (alwaysRefreshData) {
+                refreshData();
+            }
         }
-        if (alwaysRefreshData) {
-            refreshData();
-        }
+
     }
 
     protected abstract void onShowFragment();
