@@ -261,7 +261,7 @@ public abstract class FrameBaseActivity extends AppCompatActivity {
         TipDialog.show(this, tips.getMsg(), tips.getType());
     }
 
-    public void initDialogVM(FrameBaseViewModel vm) {
+    public void initViewModel(FrameBaseViewModel vm) {
         vm.getShowTip().observe(this, msg -> {
             if (TextUtils.isEmpty(msg)) {
                 showLoading();
@@ -275,5 +275,7 @@ public abstract class FrameBaseActivity extends AppCompatActivity {
         });
 
         vm.getTips().observe(this, this::showTips);
+
+        vm.getToast().observe(this, this::showShortToast);
     }
 }

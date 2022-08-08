@@ -151,7 +151,7 @@ public abstract class FrameBaseFragment extends Fragment {
         WaitDialog.dismiss();
     }
 
-    public void initDialogVM(FrameBaseViewModel vm) {
+    public void initViewModel(FrameBaseViewModel vm) {
         vm.getShowTip().observe(this, msg -> {
             if (TextUtils.isEmpty(msg)) {
                 showLoading();
@@ -169,5 +169,7 @@ public abstract class FrameBaseFragment extends Fragment {
                 getBaseActivity().showTips(tips);
             }
         });
+
+        vm.getToast().observe(this, this::showShortToast);
     }
 }

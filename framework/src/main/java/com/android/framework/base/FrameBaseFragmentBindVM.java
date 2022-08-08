@@ -19,7 +19,7 @@ public abstract class FrameBaseFragmentBindVM<DB extends ViewDataBinding, VM ext
     @Override
     public void createViewModel() {
         model = new ViewModelProvider(this).get(getViewModelClazz());
-        initDialogVM(model);
+        initViewModel(model);
     }
 
     public Class<? extends VM> getViewModelClazz() {

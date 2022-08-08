@@ -14,8 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-
 import com.android.framework.R;
+import com.android.framework.data.Tips;
+import com.android.framework.mvvm.FrameBaseViewModel;
+import com.kongzue.dialog.v3.TipDialog;
+import com.kongzue.dialog.v3.WaitDialog;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,6 +33,7 @@ public abstract class FrameBaseDialog extends DialogFragment {
     protected Context mContext;
     protected int layoutId;
     private FrameBaseDialog.DismissListener dismissListener;
+
     public FrameBaseDialog() {
     }
 
@@ -60,7 +64,7 @@ public abstract class FrameBaseDialog extends DialogFragment {
     public void onStart() {
         super.onStart();
         Dialog dialog = getDialog();
-        if (dialog == null || dialog.getWindow() == null){
+        if (dialog == null || dialog.getWindow() == null) {
             return;
         }
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -129,7 +133,7 @@ public abstract class FrameBaseDialog extends DialogFragment {
     }
 
     public boolean isShowing() {
-        if(getDialog() != null && getDialog().isShowing()) {
+        if (getDialog() != null && getDialog().isShowing()) {
             return true;
         } else {
             return false;
@@ -157,4 +161,53 @@ public abstract class FrameBaseDialog extends DialogFragment {
         void dismiss();
     }
 
+
+    /**
+     * 显示加载进度条
+     */
+    protected void showLoading() {
+        showLoading("");
+    }
+
+    protected FrameBaseActivity getBaseActivity() {
+        if (getActivity() instanceof FrameBaseActivity) {
+            return (FrameBaseActivity) getActivity();
+        }
+        return null;
+    }
+
+    protected void showLoading(String msg) {
+        if (getBaseActivity() != null) {
+            WaitDialog.reset();
+            getBaseActivity().showLoading(msg);
+        }
+    }
+
+    protected void dismissLoading() {
+        WaitDialog.dismiss();
+    }
+
+    protected void showTips(Tips tips) {
+        if (getBaseActivity() != null) {
+            TipDialog.show(getBaseActivity(), tips.getMsg(), tips.getType());
+        }
+    }
+
+    public void initViewModel(FrameBaseViewModel vm) {
+        vm.getShowTip().observe(this, msg -> {
+            if (TextUtils.isEmpty(msg)) {
+                showLoading();
+            } else {
+                showLoading(msg);
+            }
+        });
+
+        vm.getDismissTip().observe(this, msg -> {
+            dismissLoading();
+        });
+
+        vm.getTips().observe(this, this::showTips);
+
+        vm.getToast().observe(this, this::showShortToast);
+    }
 }

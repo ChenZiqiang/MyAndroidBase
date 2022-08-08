@@ -28,7 +28,7 @@ public abstract class FrameBaseActivityBindVM<DB extends ViewDataBinding, VM ext
 
     private void createViewModel() {
         model = new ViewModelProvider(this).get(getViewModelClazz());
-        initDialogVM(model);
+        initViewModel(model);
     }
 
 

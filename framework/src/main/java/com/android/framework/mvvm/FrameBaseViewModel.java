@@ -19,6 +19,7 @@ public class FrameBaseViewModel extends ViewModel {
     private MutableLiveData<String> showTip = new MutableLiveData<>();
     private MutableLiveData<String> dismissTip = new MutableLiveData<>();
     private MutableLiveData<Tips> tips = new MutableLiveData<>();
+    private MutableLiveData<String> toast = new MutableLiveData<>();
 
     public MutableLiveData<String> getShowTip() {
         return showTip;
@@ -40,6 +41,10 @@ public class FrameBaseViewModel extends ViewModel {
         return tips;
     }
 
+    public MutableLiveData<String> getToast() {
+        return toast;
+    }
+
     public void showTip() {
         showTip("");
     }
@@ -58,5 +63,9 @@ public class FrameBaseViewModel extends ViewModel {
 
     public void dismissTip() {
         dismissTip.postValue("");
+    }
+
+    public void showToast(String msg) {
+        toast.postValue(msg);
     }
 }
